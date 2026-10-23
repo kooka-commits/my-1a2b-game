@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>咕咕 1A2B 數字大冒險 - Cozy 3D 猜數字遊戲</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>1A2B Advanced Game</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -11,7 +13,9 @@
     <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <!-- Google Fonts: Fredoka & Nunito -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -48,94 +52,136 @@
         }
 
         body {
-            background-color: #FCEFD2;
-            background-image: 
-                radial-gradient(#FFDC9F 2px, transparent 2px),
-                radial-gradient(#FFDC9F 2px, #FCEFD2 2px);
-            background-size: 32px 32px;
-            background-position: 0 0, 16px 16px;
+            background-color: #F9EDBF;
+            background-image:
+                radial-gradient(#F7D98A 2px, transparent 2px),
+                radial-gradient(#F7D98A 2px, #F9EDBF 2px);
+            background-size: 26px 26px;
+            background-position: 0 0, 13px 13px;
             font-family: 'Fredoka', 'Nunito', system-ui, -apple-system, sans-serif;
             color: #5D4037;
             touch-action: manipulation;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
 
         /* Claymorphism 3D Button Utility Effects */
         .btn-clay {
-            background: linear-gradient(145deg, #ffffff, #f0e2cf);
-            box-shadow: 
-                0px 8px 15px rgba(166, 132, 94, 0.25),
-                inset 0px 4px 6px rgba(255, 255, 255, 0.9),
-                inset 0px -4px 6px rgba(166, 132, 94, 0.2);
-            border: 2px solid #FFF8EE;
+            background: linear-gradient(145deg, #fffefb, #f4dca6);
+            box-shadow:
+                0px 10px 18px rgba(180, 126, 54, 0.2),
+                0px 3px 0px rgba(214, 172, 98, 0.9),
+                inset 0px 4px 8px rgba(255, 255, 255, 0.9),
+                inset 0px -6px 10px rgba(184, 135, 66, 0.18);
+            border: 2px solid rgba(255, 248, 233, 0.9);
             transition: all 0.12s ease-in-out;
+        }
+
+        .btn-clay:hover {
+            transform: translateY(-1px);
         }
 
         .btn-clay:active {
             transform: translateY(4px);
-            box-shadow: 
-                0px 2px 5px rgba(166, 132, 94, 0.2),
-                inset 0px 2px 4px rgba(166, 132, 94, 0.3);
+            box-shadow:
+                0px 2px 8px rgba(180, 126, 54, 0.15),
+                0px 1px 0px rgba(214, 172, 98, 0.7),
+                inset 0px 2px 6px rgba(184, 135, 66, 0.25);
         }
 
         .btn-clay-pink {
-            background: linear-gradient(145deg, #FF9E9E, #FF7B7B);
-            box-shadow: 
-                0px 8px 15px rgba(230, 107, 107, 0.35),
-                inset 0px 4px 6px rgba(255, 255, 255, 0.6),
-                inset 0px -4px 6px rgba(180, 50, 50, 0.3);
-            border: 2px solid #FFC1C1;
+            background: linear-gradient(145deg, #FFB2A8, #FF7B7B);
+            box-shadow:
+                0px 10px 18px rgba(230, 107, 107, 0.28),
+                0px 3px 0px rgba(208, 92, 92, 0.9),
+                inset 0px 4px 8px rgba(255, 255, 255, 0.65),
+                inset 0px -6px 10px rgba(180, 50, 50, 0.25);
+            border: 2px solid rgba(255, 202, 202, 0.9);
             color: white;
+        }
+
+        .btn-clay-pink:hover {
+            transform: translateY(-1px);
         }
 
         .btn-clay-pink:active {
             transform: translateY(4px);
-            box-shadow: 
-                0px 2px 5px rgba(230, 107, 107, 0.3),
-                inset 0px 2px 4px rgba(180, 50, 50, 0.4);
+            box-shadow:
+                0px 2px 8px rgba(230, 107, 107, 0.2),
+                0px 1px 0px rgba(208, 92, 92, 0.8),
+                inset 0px 2px 6px rgba(180, 50, 50, 0.35);
         }
 
         .btn-clay-mint {
-            background: linear-gradient(145deg, #81E6D9, #4FD1C5);
-            box-shadow: 
-                0px 8px 15px rgba(79, 209, 197, 0.35),
-                inset 0px 4px 6px rgba(255, 255, 255, 0.6),
-                inset 0px -4px 6px rgba(35, 130, 120, 0.3);
-            border: 2px solid #B2F5EA;
+            background: linear-gradient(145deg, #A9F0D8, #6BD7C1);
+            box-shadow:
+                0px 10px 18px rgba(79, 209, 197, 0.25),
+                0px 3px 0px rgba(63, 168, 156, 0.85),
+                inset 0px 4px 8px rgba(255, 255, 255, 0.7),
+                inset 0px -6px 10px rgba(35, 130, 120, 0.22);
+            border: 2px solid rgba(193, 247, 233, 0.9);
             color: white;
         }
 
         .btn-clay-yellow {
-            background: linear-gradient(145deg, #FFE066, #F6C90E);
-            box-shadow: 
-                0px 8px 15px rgba(220, 170, 20, 0.35),
-                inset 0px 4px 6px rgba(255, 255, 255, 0.7),
-                inset 0px -4px 6px rgba(170, 120, 10, 0.3);
-            border: 2px solid #FFF3BF;
+            background: linear-gradient(145deg, #FFE785, #F7C75D);
+            box-shadow:
+                0px 10px 18px rgba(220, 170, 20, 0.24),
+                0px 3px 0px rgba(203, 142, 10, 0.9),
+                inset 0px 4px 8px rgba(255, 255, 255, 0.75),
+                inset 0px -6px 10px rgba(170, 120, 10, 0.22);
+            border: 2px solid rgba(255, 244, 180, 1);
             color: #5D4037;
         }
 
         .clay-card {
-            background: #FFFDF8;
-            box-shadow: 
-                0px 12px 25px rgba(140, 100, 60, 0.15),
+            background: linear-gradient(180deg, #fffdf9 0%, #fff8ef 100%);
+            box-shadow:
+                0px 14px 24px rgba(140, 100, 60, 0.16),
+                0px 4px 0px rgba(227, 194, 137, 0.9),
                 inset 0px 3px 6px rgba(255, 255, 255, 1),
-                inset 0px -3px 6px rgba(210, 180, 140, 0.25);
-            border: 3px solid #FFF8EE;
+                inset 0px -4px 8px rgba(210, 180, 140, 0.2);
+            border: 3px solid rgba(255, 246, 232, 0.9);
             border-radius: 28px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .clay-card:hover {
+            transform: translateY(-1px);
+            box-shadow:
+                0px 16px 28px rgba(140, 100, 60, 0.18),
+                0px 4px 0px rgba(227, 194, 137, 0.95),
+                inset 0px 3px 6px rgba(255, 255, 255, 1),
+                inset 0px -4px 8px rgba(210, 180, 140, 0.2);
         }
 
         .clay-slot {
-            background: #F3E5D8;
-            box-shadow: 
-                inset 0px 4px 8px rgba(130, 90, 50, 0.25),
-                inset 0px -2px 4px rgba(255, 255, 255, 0.8);
-            border: 2px solid #E4D0BD;
+            background: linear-gradient(180deg, #f4e7d6 0%, #ebd7bb 100%);
+            box-shadow:
+                inset 0px 4px 8px rgba(130, 90, 50, 0.22),
+                inset 0px -3px 6px rgba(255, 255, 255, 0.8),
+                0px 5px 10px rgba(124, 90, 52, 0.08);
+            border: 2px solid #e6ceb4;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
+
+        #slots-container {
+            filter: drop-shadow(0 8px 8px rgba(148, 105, 44, 0.08));
+        }
+
 
         /* Mascot bounce */
         @keyframes gentleFloat {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-6px) rotate(2deg); }
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-6px) rotate(2deg);
+            }
         }
 
         .mascot-float {
@@ -143,9 +189,19 @@
         }
 
         @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            70% { transform: scale(1.05); }
-            100% { transform: scale(1); opacity: 1; }
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            70% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         .pop-in {
@@ -161,22 +217,37 @@
             align-items: center;
             justify-content: center;
             user-select: none;
+            transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+            box-shadow:
+                0px 8px 16px rgba(180, 126, 54, 0.14),
+                0px 2px 0px rgba(214, 172, 98, 0.8);
+        }
+
+        .key-btn:not(.key-disabled):hover {
+            transform: translateY(-1px) scale(1.01);
+        }
+
+        .key-btn:not(.key-disabled):active {
+            transform: translateY(2px) scale(0.99);
         }
 
         .key-disabled {
             opacity: 0.35;
             filter: grayscale(80%);
             pointer-events: none;
+            cursor: not-allowed;
         }
 
         /* Custom Scrollbar for history */
         .history-scroll::-webkit-scrollbar {
             width: 6px;
         }
+
         .history-scroll::-webkit-scrollbar-track {
             background: rgba(220, 190, 160, 0.2);
             border-radius: 10px;
         }
+
         .history-scroll::-webkit-scrollbar-thumb {
             background: #E0C0A0;
             border-radius: 10px;
@@ -186,39 +257,47 @@
         .pb-safe {
             padding-bottom: max(1rem, env(safe-area-inset-bottom));
         }
+
         .pt-safe {
             padding-top: max(0.5rem, env(safe-area-inset-top));
         }
     </style>
 </head>
+
 <body class="flex justify-center items-center min-h-screen p-0 sm:p-4 overflow-x-hidden">
 
     <!-- Mobile iPhone Wrapper Frame -->
-    <div class="w-full max-w-md h-screen sm:h-[900px] bg-[#FFF6E9] sm:rounded-[48px] shadow-2xl flex flex-col justify-between overflow-hidden relative border-0 sm:border-[8px] border-[#FFFDF8] pt-safe pb-safe">
+    <div
+        class="w-full max-w-md h-screen sm:h-[900px] bg-[#FFF6E9] sm:rounded-[48px] shadow-2xl flex flex-col justify-between overflow-hidden relative border-0 sm:border-[8px] border-[#FFFDF8] pt-safe pb-safe">
 
         <!-- Top Header Bar -->
         <div class="px-5 pt-3 pb-2 flex items-center justify-between z-10">
             <!-- Brand / Logo -->
             <div class="flex items-center space-x-2">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-400 to-pink-400 flex items-center justify-center text-white shadow-md text-xl font-black border-2 border-white">
+                <div
+                    class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-400 to-pink-400 flex items-center justify-center text-white shadow-md text-xl font-black border-2 border-white">
                     🐤
                 </div>
                 <div>
-                    <h1 class="text-xl font-extrabold tracking-wide text-amber-950 leading-tight">咕咕 1A2B</h1>
-                    <p class="text-xs font-semibold text-amber-800/70">Cozy Toy Numbers</p>
+                    <h1 class="text-xl font-extrabold tracking-wide text-amber-950 leading-tight">Cutie 1A2B</h1>
+                    <p class="text-xs font-semibold text-amber-800/70">Tiny number pals</p>
                 </div>
             </div>
 
             <!-- Top Action Buttons (Settings, Hint, Audio) -->
             <div class="flex items-center space-x-2">
-                <button id="btn-sound" onclick="toggleSound()" class="w-10 h-10 rounded-2xl btn-clay flex items-center justify-center text-amber-900 text-lg">
+                <button id="btn-sound" onclick="toggleSound()"
+                    class="w-10 h-10 rounded-2xl btn-clay flex items-center justify-center text-amber-900 text-lg">
                     <i id="icon-sound" class="fas fa-volume-high"></i>
                 </button>
-                <button id="btn-hint" onclick="openHintModal()" class="w-10 h-10 rounded-2xl btn-clay-yellow flex items-center justify-center text-amber-900 text-lg relative">
+                <button id="btn-hint" onclick="openHintModal()"
+                    class="w-10 h-10 rounded-2xl btn-clay-yellow flex items-center justify-center text-amber-900 text-lg relative">
                     <i class="fas fa-lightbulb"></i>
-                    <span id="hint-badge" class="absolute -top-1 -right-1 w-5 h-5 bg-pink-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white">3</span>
+                    <span id="hint-badge"
+                        class="absolute -top-1 -right-1 w-5 h-5 bg-pink-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white">3</span>
                 </button>
-                <button onclick="confirmRestart()" class="w-10 h-10 rounded-2xl btn-clay flex items-center justify-center text-amber-900 text-lg">
+                <button onclick="confirmRestart()"
+                    class="w-10 h-10 rounded-2xl btn-clay flex items-center justify-center text-amber-900 text-lg">
                     <i class="fas fa-rotate-right"></i>
                 </button>
             </div>
@@ -228,18 +307,20 @@
         <div class="px-5 py-1 z-10">
             <div class="clay-card p-3 flex items-center space-x-3 bg-gradient-to-r from-orange-100/80 to-amber-50/80">
                 <!-- Mascot Avatar -->
-                <div id="mascot-avatar" class="w-12 h-12 rounded-2xl bg-pink-200 border-2 border-white flex items-center justify-center text-2xl shadow-inner mascot-float flex-shrink-0">
+                <div id="mascot-avatar"
+                    class="w-12 h-12 rounded-2xl bg-pink-200 border-2 border-white flex items-center justify-center text-2xl shadow-inner mascot-float flex-shrink-0">
                     🐣
                 </div>
                 <!-- Speech Bubble Text -->
                 <div class="flex-1">
                     <div id="mascot-text" class="text-xs sm:text-sm font-bold text-amber-900 leading-snug">
-                        Hi！我是咕咕，快猜猜我心裡想的不重複數字吧！
+                        Hi! I'm Guna~ Can you guess my super secret digits?
                     </div>
                     <div class="flex items-center space-x-3 mt-1 text-[11px] font-bold text-amber-800/70">
                         <span><i class="fa-regular fa-clock mr-1"></i><span id="game-timer">00:00</span></span>
-                        <span><i class="fa-solid fa-gamepad mr-1"></i>次數: <span id="attempt-count">0</span></span>
-                        <span id="digit-mode-tag" class="bg-amber-200/80 px-1.5 py-0.5 rounded-md text-amber-900">4位數</span>
+                        <span><i class="fa-solid fa-gamepad mr-1"></i>Guessies: <span id="attempt-count">0</span></span>
+                        <span id="digit-mode-tag" class="bg-amber-200/80 px-1.5 py-0.5 rounded-md text-amber-900">4
+                            digits</span>
                     </div>
                 </div>
             </div>
@@ -248,15 +329,18 @@
         <!-- Main Display Area: History List -->
         <div class="flex-1 px-5 py-2 overflow-hidden flex flex-col justify-end min-h-0">
             <div class="text-xs font-bold text-amber-800/60 mb-1 px-1 flex justify-between items-center">
-                <span><i class="fas fa-history mr-1"></i>猜測紀錄</span>
-                <button onclick="openSettingsModal()" class="text-xs text-pink-600 hover:underline font-bold">切換難度</button>
+                <span><i class="fas fa-history mr-1"></i>Past Guessies</span>
+                <button onclick="openSettingsModal()" class="text-xs text-pink-600 hover:underline font-bold">Pick a
+                    challenge</button>
             </div>
-            
-            <div id="history-container" class="history-scroll overflow-y-auto space-y-2 pr-1 max-h-full flex flex-col-reverse">
+
+            <div id="history-container"
+                class="history-scroll overflow-y-auto space-y-2 pr-1 max-h-full flex flex-col-reverse">
                 <!-- History Items inserted dynamically -->
-                <div id="empty-history" class="text-center py-8 text-amber-800/40 font-medium text-sm flex flex-col items-center">
+                <div id="empty-history"
+                    class="text-center py-8 text-amber-800/40 font-medium text-sm flex flex-col items-center">
                     <i class="fas fa-cubes text-3xl mb-2 opacity-50"></i>
-                    輸入數字後按 OK 開始驗證！
+                    Type your digits and tap OK to begin the fun! ✨
                 </div>
             </div>
         </div>
@@ -282,7 +366,7 @@
                 <button onclick="pressKey('7')" id="key-7" class="key-btn h-12 btn-clay text-amber-950">7</button>
                 <button onclick="pressKey('8')" id="key-8" class="key-btn h-12 btn-clay text-amber-950">8</button>
                 <button onclick="pressKey('9')" id="key-9" class="key-btn h-12 btn-clay text-amber-950">9</button>
-                
+
                 <!-- Backspace -->
                 <button onclick="pressBackspace()" class="key-btn h-12 btn-clay text-rose-700 active:bg-rose-100">
                     <i class="fas fa-backspace text-xl"></i>
@@ -290,7 +374,8 @@
                 <!-- Zero -->
                 <button onclick="pressKey('0')" id="key-0" class="key-btn h-12 btn-clay text-amber-950">0</button>
                 <!-- Submit Button -->
-                <button onclick="submitGuess()" id="btn-submit" class="key-btn h-12 btn-clay-pink text-white font-bold text-lg">
+                <button onclick="submitGuess()" id="btn-submit"
+                    class="key-btn h-12 btn-clay-pink text-white font-bold text-lg">
                     OK
                 </button>
             </div>
@@ -299,111 +384,127 @@
     </div>
 
     <!-- Victory Modal -->
-    <div id="victory-modal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div id="victory-modal"
+        class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="clay-card w-full max-w-sm p-6 bg-[#FFFDF8] text-center pop-in relative overflow-hidden">
-            <div class="w-20 h-20 bg-amber-200 rounded-full flex items-center justify-center text-4xl mx-auto mb-3 shadow-inner border-4 border-white mascot-float">
+            <div
+                class="w-20 h-20 bg-amber-200 rounded-full flex items-center justify-center text-4xl mx-auto mb-3 shadow-inner border-4 border-white mascot-float">
                 🎉
             </div>
-            <h2 class="text-2xl font-black text-amber-950 mb-1">恭喜答對囉！</h2>
-            <p class="text-sm font-bold text-amber-800/80 mb-4">太厲害了，你解開了秘密數字！</p>
-            
+            <h2 class="text-2xl font-black text-amber-950 mb-1">Yay! You did it!</h2>
+            <p class="text-sm font-bold text-amber-800/80 mb-4">You cracked the secret number! So smart! ✨</p>
+
             <!-- Result Stats Card -->
             <div class="bg-amber-100/60 rounded-2xl p-4 mb-5 border border-amber-200/80 space-y-2">
                 <div class="flex justify-between items-center text-sm">
-                    <span class="text-amber-800 font-bold">謎底答案：</span>
+                    <span class="text-amber-800 font-bold">Secret Number:</span>
                     <span id="modal-answer" class="text-xl font-black text-pink-600 tracking-wider">1234</span>
                 </div>
                 <div class="flex justify-between items-center text-sm">
-                    <span class="text-amber-800 font-bold">總共嘗試：</span>
-                    <span id="modal-attempts" class="font-extrabold text-amber-950">6 次</span>
+                    <span class="text-amber-800 font-bold">Total Guessies:</span>
+                    <span id="modal-attempts" class="font-extrabold text-amber-950">6 times</span>
                 </div>
                 <div class="flex justify-between items-center text-sm">
-                    <span class="text-amber-800 font-bold">花費時間：</span>
+                    <span class="text-amber-800 font-bold">Time Flown:</span>
                     <span id="modal-time" class="font-extrabold text-amber-950">01:25</span>
                 </div>
             </div>
 
-            <button onclick="closeVictoryModal(); resetGame();" class="w-full py-3.5 btn-clay-pink font-extrabold text-lg rounded-2xl shadow-lg">
-                再玩一次 <i class="fas fa-play ml-1"></i>
+            <button onclick="closeVictoryModal(); resetGame();"
+                class="w-full py-3.5 btn-clay-pink font-extrabold text-lg rounded-2xl shadow-lg">
+                Play Again, buddy! <i class="fas fa-play ml-1"></i>
             </button>
         </div>
     </div>
 
     <!-- Hint Modal -->
-    <div id="hint-modal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div id="hint-modal"
+        class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="clay-card w-full max-w-sm p-5 bg-[#FFFDF8] text-center pop-in relative">
-            <button onclick="closeHintModal()" class="absolute top-4 right-4 text-amber-800/50 hover:text-amber-950 text-xl font-bold">
+            <button onclick="closeHintModal()"
+                class="absolute top-4 right-4 text-amber-800/50 hover:text-amber-950 text-xl font-bold">
                 <i class="fas fa-times"></i>
             </button>
-            <div class="w-14 h-14 bg-yellow-200 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-2 text-amber-800 shadow-inner border-2 border-white">
+            <div
+                class="w-14 h-14 bg-yellow-200 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-2 text-amber-800 shadow-inner border-2 border-white">
                 💡
             </div>
-            <h3 class="text-xl font-extrabold text-amber-950 mb-1">可愛提示小屋</h3>
-            <p class="text-xs font-bold text-amber-800/70 mb-4">選擇一種道具來幫助你猜出答案吧！</p>
+            <h3 class="text-xl font-extrabold text-amber-950 mb-1">Tiny Hint Garden</h3>
+            <p class="text-xs font-bold text-amber-800/70 mb-4">Pick a little helper to sniff out the answer! 🐾</p>
 
             <div class="space-y-3 text-left">
                 <!-- Hint Option 1 -->
-                <button onclick="useHint('reveal')" id="btn-hint-reveal" class="w-full p-3 bg-amber-50 border-2 border-amber-200 rounded-2xl flex items-center justify-between hover:bg-amber-100 transition">
+                <button onclick="useHint('reveal')" id="btn-hint-reveal"
+                    class="w-full p-3 bg-amber-50 border-2 border-amber-200 rounded-2xl flex items-center justify-between hover:bg-amber-100 transition">
                     <div class="flex items-center space-x-3">
                         <span class="text-2xl">🔍</span>
                         <div>
-                            <div class="text-sm font-bold text-amber-950">揭示一位數字</div>
-                            <div class="text-xs text-amber-700/70">隨機透露正確位置的數字</div>
+                            <div class="text-sm font-bold text-amber-950">Peek at a Digit</div>
+                            <div class="text-xs text-amber-700/70">A tiny surprise reveal for your detective work</div>
                         </div>
                     </div>
-                    <span class="text-xs font-black bg-yellow-400 text-amber-950 px-2 py-1 rounded-lg">消耗 1 提示</span>
+                    <span class="text-xs font-black bg-yellow-400 text-amber-950 px-2 py-1 rounded-lg">Uses 1
+                        clue</span>
                 </button>
 
                 <!-- Hint Option 2 -->
-                <button onclick="useHint('eliminate')" id="btn-hint-eliminate" class="w-full p-3 bg-amber-50 border-2 border-amber-200 rounded-2xl flex items-center justify-between hover:bg-amber-100 transition">
+                <button onclick="useHint('eliminate')" id="btn-hint-eliminate"
+                    class="w-full p-3 bg-amber-50 border-2 border-amber-200 rounded-2xl flex items-center justify-between hover:bg-amber-100 transition">
                     <div class="flex items-center space-x-3">
                         <span class="text-2xl">❌</span>
                         <div>
-                            <div class="text-sm font-bold text-amber-950">排除錯誤數字</div>
-                            <div class="text-xs text-amber-700/70">劃掉2個不在答案裡的數字</div>
+                            <div class="text-sm font-bold text-amber-950">Cross Out Wrong Digits</div>
+                            <div class="text-xs text-amber-700/70">Banish 2 digits that aren't in the secret</div>
                         </div>
                     </div>
-                    <span class="text-xs font-black bg-yellow-400 text-amber-950 px-2 py-1 rounded-lg">消耗 1 提示</span>
+                    <span class="text-xs font-black bg-yellow-400 text-amber-950 px-2 py-1 rounded-lg">Uses 1
+                        clue</span>
                 </button>
             </div>
         </div>
     </div>
 
     <!-- Settings Modal -->
-    <div id="settings-modal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div id="settings-modal"
+        class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="clay-card w-full max-w-sm p-5 bg-[#FFFDF8] text-center pop-in relative">
-            <button onclick="closeSettingsModal()" class="absolute top-4 right-4 text-amber-800/50 hover:text-amber-950 text-xl font-bold">
+            <button onclick="closeSettingsModal()"
+                class="absolute top-4 right-4 text-amber-800/50 hover:text-amber-950 text-xl font-bold">
                 <i class="fas fa-times"></i>
             </button>
-            <div class="w-14 h-14 bg-pink-200 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-2 text-pink-700 shadow-inner border-2 border-white">
+            <div
+                class="w-14 h-14 bg-pink-200 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-2 text-pink-700 shadow-inner border-2 border-white">
                 ⚙️
             </div>
-            <h3 class="text-xl font-extrabold text-amber-950 mb-1">遊戲難度設定</h3>
-            <p class="text-xs font-bold text-amber-800/70 mb-4">切換位數將重新開始新的一局遊戲</p>
+            <h3 class="text-xl font-extrabold text-amber-950 mb-1">Pick Your Cozy Challenge</h3>
+            <p class="text-xs font-bold text-amber-800/70 mb-4">Changing the digit count starts a fresh little game~</p>
 
             <div class="grid grid-cols-2 gap-3 mb-5">
-                <button onclick="selectDigitMode(3)" id="mode-btn-3" class="p-4 rounded-2xl border-2 font-black text-center transition flex flex-col items-center">
+                <button onclick="selectDigitMode(3)" id="mode-btn-3"
+                    class="p-4 rounded-2xl border-2 font-black text-center transition flex flex-col items-center">
                     <span class="text-2xl mb-1">🥉</span>
-                    <span class="text-base">3 位數</span>
-                    <span class="text-[10px] opacity-75 font-normal mt-0.5">新手簡單版</span>
+                    <span class="text-base">3 Digits</span>
+                    <span class="text-[10px] opacity-75 font-normal mt-0.5">Easy-peasy mode</span>
                 </button>
-                <button onclick="selectDigitMode(4)" id="mode-btn-4" class="p-4 rounded-2xl border-2 font-black text-center transition flex flex-col items-center">
+                <button onclick="selectDigitMode(4)" id="mode-btn-4"
+                    class="p-4 rounded-2xl border-2 font-black text-center transition flex flex-col items-center">
                     <span class="text-2xl mb-1">🥇</span>
-                    <span class="text-base">4 位數</span>
-                    <span class="text-[10px] opacity-75 font-normal mt-0.5">經典標準版</span>
+                    <span class="text-base">4 Digits</span>
+                    <span class="text-[10px] opacity-75 font-normal mt-0.5">Classic cozy mode</span>
                 </button>
             </div>
 
             <button onclick="closeSettingsModal()" class="w-full py-3 btn-clay font-bold text-amber-950 rounded-xl">
-                關閉
+                Paw Close
             </button>
         </div>
     </div>
 
     <!-- Notification Toast Box -->
-    <div id="toast" class="fixed top-12 left-1/2 transform -translate-x-1/2 bg-amber-950 text-white font-bold text-xs px-4 py-2.5 rounded-full shadow-2xl z-50 flex items-center space-x-2 transition-all duration-300 opacity-0 pointer-events-none">
+    <div id="toast"
+        class="fixed top-12 left-1/2 transform -translate-x-1/2 bg-amber-950 text-white font-bold text-xs px-4 py-2.5 rounded-full shadow-2xl z-50 flex items-center space-x-2 transition-all duration-300 opacity-0 pointer-events-none">
         <span id="toast-icon">✨</span>
-        <span id="toast-msg">提示訊息</span>
+        <span id="toast-msg">Little clue time!</span>
     </div>
 
     <!-- JavaScript Game Logic -->
@@ -469,7 +570,7 @@
                         const noteGain = audioCtx.createGain();
                         noteOsc.connect(noteGain);
                         noteGain.connect(audioCtx.destination);
-                        
+
                         noteOsc.type = 'sine';
                         noteOsc.frequency.setValueAtTime(freq, now + i * 0.1);
                         noteGain.gain.setValueAtTime(0.2, now + i * 0.1);
@@ -494,9 +595,10 @@
             secretCode = generateSecretCode(digitLength);
             currentGuess = [];
             history = [];
+            hintCount = 3;
             eliminatedDigits.clear();
             revealedIndices = {};
-            
+
             // Reset Timer
             clearInterval(timerInterval);
             secondsElapsed = 0;
@@ -510,8 +612,12 @@
             renderSlots();
             renderHistory();
             updateKeypadState();
-            setMascot('🐣', `Hi！我是咕咕，快猜猜我心裡想的 ${digitLength} 位不重複數字吧！`);
+            updateHintBadge();
+            setMascot('🐣', `Hi! I'm Guna~ can you guess my super secret digits?`);
             document.getElementById('attempt-count').innerText = '0';
+            closeHintModal();
+            closeSettingsModal();
+            closeVictoryModal();
         }
 
         function generateSecretCode(length) {
@@ -534,9 +640,8 @@
                 const val = currentGuess[i] || '';
                 const isRevealed = revealedIndices[i] !== undefined && val === '';
 
-                slot.className = `w-14 h-16 sm:w-16 sm:h-20 clay-slot rounded-2xl flex items-center justify-center text-2xl sm:text-3xl font-extrabold transition-all duration-150 ${
-                    val ? 'text-pink-600 bg-orange-50 scale-105 border-pink-300' : 'text-amber-800/40'
-                }`;
+                slot.className = `w-14 h-16 sm:w-16 sm:h-20 clay-slot rounded-2xl flex items-center justify-center text-2xl sm:text-3xl font-extrabold transition-all duration-150 ${val ? 'text-pink-600 bg-orange-50 scale-105 border-pink-300' : 'text-amber-800/40'
+                    }`;
 
                 if (val) {
                     slot.innerText = val;
@@ -592,8 +697,8 @@
 
         function submitGuess() {
             if (currentGuess.length !== digitLength) {
-                showToast('⚠️', `請先輸入滿 ${digitLength} 個數字喔！`);
-                setMascot('🧐', `還沒填滿 ${digitLength} 個數字喔～再檢查看看！`);
+                showToast('⚠️', `Oopsie! Please fill all ${digitLength} digit slots first, cutie!`);
+                setMascot('🧐', `Almost there! Fill in all ${digitLength} digits first, cutie!`);
                 return;
             }
 
@@ -627,13 +732,13 @@
                 // Victory!
                 clearInterval(timerInterval);
                 playSound('win');
-                setMascot('🥳', '哇！全對了！你太神啦！');
+                setMascot('🥳', 'Yay! You cracked my secret number!');
                 triggerConfetti();
                 setTimeout(showVictoryModal, 500);
             } else if (a > 0 || b > 0) {
-                setMascot('🐥', `結果是 ${a}A${b}B，加油加油！快接近了！`);
+                setMascot('🐥', `Aww, it\'s ${a}A${b}B~ keep guessing, little detective!`);
             } else {
-                setMascot('🥑', '槓龜 0A0B 囉，代表這幾個數字都不在答案裡！');
+                setMascot('🥑', 'Oh my! 0A0B!! None of those digits are in the secret~ try a new combo!');
             }
         }
 
@@ -692,7 +797,7 @@
         // Modal Controls
         function showVictoryModal() {
             document.getElementById('modal-answer').innerText = secretCode.join('');
-            document.getElementById('modal-attempts').innerText = `${history.length} 次`;
+            document.getElementById('modal-attempts').innerText = `${history.length} times`;
             document.getElementById('modal-time').innerText = document.getElementById('game-timer').innerText;
             document.getElementById('victory-modal').classList.remove('hidden');
         }
@@ -719,7 +824,7 @@
 
         function useHint(type) {
             if (hintCount <= 0) {
-                showToast('💡', '提示道具已經用光囉！');
+                showToast('💡', 'No more clues left, little detective! 😅');
                 closeHintModal();
                 return;
             }
@@ -734,17 +839,17 @@
                 }
 
                 if (unrevealedPos.length === 0) {
-                    showToast('🔍', '答案位置已經全部揭示囉！');
+                    showToast('🔍', 'All the secret spots are already revealed!');
                     return;
                 }
 
                 const targetPos = unrevealedPos[Math.floor(Math.random() * unrevealedPos.length)];
                 revealedIndices[targetPos] = secretCode[targetPos];
-                
+
                 hintCount--;
                 updateHintBadge();
-                showToast('🔍', `位置第 ${targetPos + 1} 位數字是 ${secretCode[targetPos]}`);
-                setMascot('💡', `偷偷告訴你，第 ${targetPos + 1} 個數字是 ${secretCode[targetPos]} 喔！`);
+                showToast('🔍', `Psst! Digit ${targetPos + 1} is ${secretCode[targetPos]}~`);
+                setMascot('💡', `Hehe! The ${targetPos + 1}th digit is ${secretCode[targetPos]}~`);
                 renderSlots();
                 closeHintModal();
 
@@ -759,7 +864,7 @@
                 }
 
                 if (unusedWrongDigits.length === 0) {
-                    showToast('❌', '沒有更多可排除的錯誤數字了！');
+                    showToast('❌', 'No more incorrect digits to eliminate!');
                     return;
                 }
 
@@ -776,23 +881,26 @@
                 hintCount--;
                 updateHintBadge();
                 updateKeypadState();
-                showToast('❌', `已為你劃掉數字: ${removed.join(', ')}`);
-                setMascot('🧹', `幫你幫你！劃掉錯誤數字 [${removed.join(', ')}]！`);
+                showToast('❌', `Poof! Crossed out: ${removed.join(', ')}`);
+                setMascot('🧹', `Bye-bye, silly digits! I crossed off [${removed.join(', ')}]!`);
                 closeHintModal();
             }
         }
 
         function updateHintBadge() {
             document.getElementById('hint-badge').innerText = hintCount;
+            const hintBtn = document.getElementById('btn-hint');
             if (hintCount <= 0) {
-                document.getElementById('btn-hint').classList.add('opacity-50');
+                hintBtn.classList.add('opacity-50');
+            } else {
+                hintBtn.classList.remove('opacity-50');
             }
         }
 
         function confirmRestart() {
-            if (confirm('確定要放棄當前進度重新開始嗎？')) {
+            if (confirm('Aww, are you sure you want to abandon this cutie puzzle and start fresh?')) {
                 resetGame();
-                showToast('🔄', '遊戲已重新開始！');
+                showToast('🔄', 'Fresh round! Let\'s go!');
             }
         }
 
@@ -802,12 +910,12 @@
             updateSettingsUI();
             closeSettingsModal();
             resetGame();
-            showToast('🎮', `已切換為 ${mode} 位數模式`);
+            showToast('🎮', `A new ${mode}-digit challenge is ready!`);
         }
 
         function updateSettingsUI() {
-            document.getElementById('digit-mode-tag').innerText = `${digitLength}位數`;
-            
+            document.getElementById('digit-mode-tag').innerText = `${digitLength} digits`;
+
             const btn3 = document.getElementById('mode-btn-3');
             const btn4 = document.getElementById('mode-btn-4');
 
@@ -827,11 +935,11 @@
             if (soundEnabled) {
                 icon.className = 'fas fa-volume-high';
                 btn.classList.remove('opacity-50');
-                showToast('🔊', '音效已開啟');
+                showToast('🔊', 'Cute sound effects on!');
             } else {
                 icon.className = 'fas fa-volume-xmark';
                 btn.classList.add('opacity-50');
-                showToast('🔇', '音效已靜音');
+                showToast('🔇', 'Sound effects muted for now');
             }
         }
 
@@ -860,4 +968,5 @@
         }
     </script>
 </body>
+
 </html>
